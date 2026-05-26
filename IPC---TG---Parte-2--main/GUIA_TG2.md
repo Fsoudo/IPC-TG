@@ -53,21 +53,21 @@ App móvel Android de gestão de medicação, com dois perfis de utilizador:
 
 | M1 — Ecrã Bloqueado | M2 — Notificação Expandida |
 |:---:|:---:|
-| ![M1](../IPC---TG---Parte-1--main/Docs/07_prototipo/miguel/figma/M1%20-%20Ecra%20Bloqueado.png) | ![M2](../IPC---TG---Parte-1--main/Docs/07_prototipo/miguel/figma/M2%20-%20Notificacao%20Expandida.png) |
+| ![M1](assets/figma/M1%20-%20Ecra%20Bloqueado.png) | ![M2](assets/figma/M2%20-%20Notificacao%20Expandida.png) |
 
 | M3 — Confirmação | M4 — Ecrã Principal |
 |:---:|:---:|
-| ![M3](../IPC---TG---Parte-1--main/Docs/07_prototipo/miguel/figma/M3%20-%20Confirmacao.png) | ![M4](../IPC---TG---Parte-1--main/Docs/07_prototipo/miguel/figma/M4%20-%20Ecra%20Principal.png) |
+| ![M3](assets/figma/M3%20-%20Confirmacao.png) | ![M4](assets/figma/M4%20-%20Ecra%20Principal.png) |
 
 #### Cenário 2 — Francisco (Cuidador)
 
 | F1 — Ecrã Bloqueado | F2 — Dashboard Cuidador |
 |:---:|:---:|
-| ![F1](../IPC---TG---Parte-1--main/Docs/07_prototipo/francisco/figma/F1%20-%20Ecra%20Bloqueado.png) | ![F2](../IPC---TG---Parte-1--main/Docs/07_prototipo/francisco/figma/F2%20-%20Dashboard%20Cuidador.png) |
+| ![F1](assets/figma/F1%20-%20Ecra%20Bloqueado.png) | ![F2](assets/figma/F2%20-%20Dashboard%20Cuidador.png) |
 
 | F3 — Detalhe das Tomas | F4 — Histórico Semanal |
 |:---:|:---:|
-| ![F3](../IPC---TG---Parte-1--main/Docs/07_prototipo/francisco/figma/F3%20-%20Detalhe%20Tomas%20Antonio.png) | ![F4](../IPC---TG---Parte-1--main/Docs/07_prototipo/francisco/figma/F4%20-%20Historico%20Semanal.png) |
+| ![F3](assets/figma/F3%20-%20Detalhe%20Tomas%20Antonio.png) | ![F4](assets/figma/F4%20-%20Historico%20Semanal.png) |
 
 | F5 — Plano de Medicação |
 |:---:|

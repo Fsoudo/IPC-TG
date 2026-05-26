@@ -20,6 +20,12 @@ App móvel Android de gestão de medicação, com dois perfis de utilizador:
 | **Sistema similar analisado** | MediSafe | MyTherapy |
 | **Ecrãs** | M1–M4 | F1–F4 |
 
+### Projeto Figma
+
+🔗 **Ficheiro Figma da equipa:** [EasyMed — TG1](https://www.figma.com/design/hRIuwAsRf21tAVVn0yHLX8/EasyMed---TG1?node-id=0-1&t=q7KIIRb9II86FJBW-1)
+
+> Os mockups abaixo correspondem aos ecrãs de média fidelidade exportados do Figma. **Falta criar o ecrã F5 (Plano de Medicação)** no Figma antes do redesign Android.
+
 ### Ecrãs do protótipo Figma (baixa/média fidelidade)
 
 **Cenário 1 — Miguel (Paciente)**
@@ -40,6 +46,32 @@ App móvel Android de gestão de medicação, com dois perfis de utilizador:
 | F3 | Detalhe das Tomas | Lista cronológica + botão "Ligar ao Paciente" |
 | F4 | Histórico Semanal | Calendário + exportação de relatório PDF |
 | F5 | Plano de Medicação | Gestão do plano de medicação do paciente (adicionar / editar / remover medicamentos) |
+
+### Galeria de mockups (Figma)
+
+#### Cenário 1 — Miguel (Paciente)
+
+| M1 — Ecrã Bloqueado | M2 — Notificação Expandida |
+|:---:|:---:|
+| ![M1](../IPC---TG---Parte-1--main/Docs/07_prototipo/miguel/figma/M1%20-%20Ecra%20Bloqueado.png) | ![M2](../IPC---TG---Parte-1--main/Docs/07_prototipo/miguel/figma/M2%20-%20Notificacao%20Expandida.png) |
+
+| M3 — Confirmação | M4 — Ecrã Principal |
+|:---:|:---:|
+| ![M3](../IPC---TG---Parte-1--main/Docs/07_prototipo/miguel/figma/M3%20-%20Confirmacao.png) | ![M4](../IPC---TG---Parte-1--main/Docs/07_prototipo/miguel/figma/M4%20-%20Ecra%20Principal.png) |
+
+#### Cenário 2 — Francisco (Cuidador)
+
+| F1 — Ecrã Bloqueado | F2 — Dashboard Cuidador |
+|:---:|:---:|
+| ![F1](../IPC---TG---Parte-1--main/Docs/07_prototipo/francisco/figma/F1%20-%20Ecra%20Bloqueado.png) | ![F2](../IPC---TG---Parte-1--main/Docs/07_prototipo/francisco/figma/F2%20-%20Dashboard%20Cuidador.png) |
+
+| F3 — Detalhe das Tomas | F4 — Histórico Semanal |
+|:---:|:---:|
+| ![F3](../IPC---TG---Parte-1--main/Docs/07_prototipo/francisco/figma/F3%20-%20Detalhe%20Tomas%20Antonio.png) | ![F4](../IPC---TG---Parte-1--main/Docs/07_prototipo/francisco/figma/F4%20-%20Historico%20Semanal.png) |
+
+| F5 — Plano de Medicação |
+|:---:|
+| *(por criar no Figma — novo ecrã para gestão do plano de medicação)* |
 
 ### HTAs — Cenário 1 e Cenário 2
 
@@ -354,6 +386,7 @@ Contém: relatório PDF + apresentação + link GitHub da app.
 
 ### Conjunto
 - Repositório Parte 1: https://github.com/Fsoudo/IPC-TG1
+- Projeto Figma: https://www.figma.com/design/hRIuwAsRf21tAVVn0yHLX8/EasyMed---TG1?node-id=0-1&t=q7KIIRb9II86FJBW-1
 
 ---
 

@@ -1,272 +1,317 @@
 # Guia de Trabalho — TG2: Implementação e Avaliação de um Protótipo Funcional
-**Francisco Manuel Baião Soudo — Nº14060 | IPC | IPBeja 2026**
+**Equipa:** Francisco Manuel Baião Soudo (Nº14060) · Miguel Pauzinho (Nº27131)
+**UC:** IPC — Interação Pessoa-Computador | IPBeja 2026
 
 ---
 
 ## 1. Contexto: O que foi feito na Parte 1
 
 ### Aplicação: EasyMed
-App móvel Android de gestão de medicação de pacientes por cuidadores informais.
+App móvel Android de gestão de medicação, com dois perfis de utilizador:
+- **Paciente** (Cenário 1 — Miguel): idoso que confirma as tomas diárias.
+- **Cuidador informal** (Cenário 2 — Francisco): familiar que monitoriza remotamente.
 
-### O meu cenário (Cenário 2) — Receber Notificação de Toma Ignorada
-- **Persona:** Carla Sousa, 46 anos, Enfermeira, cuidadora do pai (António, 74 anos, pós-AVC, 5 medicamentos/dia)
-- **Tarefa principal:** Reagir a um alerta crítico de incumprimento terapêutico (toma ignorada)
-- **Fluxo do cenário:**
-  1. Carla recebe notificação push no ecrã bloqueado (Sinvastatina 20mg, 30 min de atraso)
-  2. Abre a app → Dashboard do Cuidador (código de cores: 🔴 ignorado / 🟢 tomado / 🟡 atraso)
-  3. Acede ao detalhe das tomas → usa botão "Ligar ao Paciente"
-  4. Confirma toma → estado atualiza em tempo real
-  5. Consulta Histórico Semanal → identifica padrão recorrente
+### Os dois cenários
 
-### Os 4 ecrãs do protótipo Figma (baixa/média fidelidade)
+| | **Cenário 1 — Miguel** | **Cenário 2 — Francisco** |
+|---|---|---|
+| **Persona** | António Ferreira, 72, reformado, vive sozinho | Carla Sousa, 46, enfermeira, monitoriza o pai |
+| **Tarefa principal** | Confirmar a toma de medicamento | Reagir a alerta de toma ignorada |
+| **Sistema similar analisado** | MediSafe | MyTherapy |
+| **Ecrãs** | M1–M4 | F1–F4 |
+
+### Ecrãs do protótipo Figma (baixa/média fidelidade)
+
+**Cenário 1 — Miguel (Paciente)**
+
 | ID | Ecrã | Descrição |
 |----|------|-----------|
-| F1 | Ecrã Bloqueado | Notificação crítica com nome do paciente e medicamento |
-| F2 | Dashboard Cuidador | Cartões com estado visual de cada paciente (código de cores) |
-| F3 | Detalhe das Tomas | Lista cronológica com semântica de cores + botão "Ligar ao Paciente" |
-| F4 | Histórico Semanal | Vista de calendário + exportação de relatório PDF |
+| M1 | Ecrã Bloqueado | Alerta de toma com nome do medicamento |
+| M2 | Notificação Expandida | Botões grandes "Tomei" / "Adiar" |
+| M3 | Confirmação | Visto verde + mensagem "Medicamento registado às HH:MM" |
+| M4 | Ecrã Principal | Resumo diário das tomas (verde/vermelho/amarelo) |
 
-### HTA — Estrutura hierárquica (Cenário 2)
+**Cenário 2 — Francisco (Cuidador)**
+
+| ID | Ecrã | Descrição |
+|----|------|-----------|
+| F1 | Ecrã Bloqueado | Notificação crítica de toma ignorada |
+| F2 | Dashboard Cuidador | Cartões com estado visual de cada paciente |
+| F3 | Detalhe das Tomas | Lista cronológica + botão "Ligar ao Paciente" |
+| F4 | Histórico Semanal | Calendário + exportação de relatório PDF |
+
+### HTAs — Cenário 1 e Cenário 2
+
 ```
+CENÁRIO 1 (Miguel)
+0. Confirmar a toma de medicamento
+   ├── 1. Receber o alerta de toma
+   ├── 2. Tomar o medicamento
+   ├── 3. Confirmar a toma na app (botão "Tomei")
+   └── 4. Verificar o resumo do dia [opcional]
+```
+
+```
+CENÁRIO 2 (Francisco)
 0. Reagir a uma notificação de toma ignorada
-   ├── 1. Receber e reconhecer o alerta (vibração/som + ecrã bloqueado)
-   ├── 2. Diagnóstico de contexto (abrir app → dashboard → detalhe)
+   ├── 1. Receber e reconhecer o alerta
+   ├── 2. Diagnóstico de contexto (dashboard → detalhe)
    ├── 3. Intervenção direta (ligar ao paciente)
-   ├── 4. Verificação de ciclo (confirmar atualização do estado na interface)
-   └── 5. Análise de tendências [opcional] (histórico semanal → nota para médico)
-Plano 0: 1 → 2 → [se ignorada] → 3 → 4 → [opcional] 5
+   ├── 4. Verificação de ciclo (estado atualiza)
+   └── 5. Análise de tendências [opcional]
 ```
 
-### Decisões de design já tomadas (a manter/melhorar na Parte 2)
-- **Semântica de cores:** Verde (tomado), Vermelho (ignorado), Amarelo (tomado com atraso)
-- **Heurísticas Nielsen aplicadas:** Visibilidade do estado, Prevenção de erros, Correspondência com o mundo real, Estética minimalista
-- **Interação:** Manipulação direta (toque em botões ≥ 48×48dp), Bottom Navigation Bar (Hoje / Medicamentos / Histórico / Perfil), notificações push
-- **Acessibilidade:** Texto ajustável, compatibilidade TalkBack
-- **Navegação:** Arquitetura concêntrica centrada no "Sumário Diário" — máximo 1 nível de profundidade para ações críticas
+### Decisões de design partilhadas (a manter na Parte 2)
+- **Semântica de cores:** 🟢 Verde (tomado), 🔴 Vermelho (ignorado), 🟡 Amarelo (atraso)
+- **Heurísticas Nielsen:** visibilidade do estado, prevenção de erros, correspondência com o mundo real, estética minimalista
+- **Acessibilidade:** botões ≥ 48×48dp, texto ajustável, TalkBack
+- **Navegação:** Bottom Navigation Bar (Hoje / Medicamentos / Histórico / Perfil)
+- **Arquitetura:** concêntrica, centrada no "Sumário Diário"
 
-### Ferramentas da equipa
-- **Design:** Figma
-- **Gestão:** Trello (Épicos / Tarefas / Sprints)
-- **Versões:** GitHub — https://github.com/Fsoudo/IPC-TG1-PART-1
-- **Comunicação:** WhatsApp
+### Ferramentas
+- **Design:** Figma · **Gestão:** Trello · **Versões:** GitHub · **Comunicação:** WhatsApp
+- Repo Parte 1: https://github.com/Fsoudo/IPC-TG1
 
 ---
 
 ## 2. O que pede a Parte 2
 
-| Componente | Cotação | O que fazer |
+| Componente | Cotação | Descrição |
 |---|---|---|
-| Protótipo de Alta Fidelidade | 10 valores | App Android funcional (com redesign baseado no feedback da apresentação do low-fi) |
-| Funcionalidades Implementadas | 5 valores | Implementar 1 funcionalidade prioritária do Cenário 2 |
-| Avaliação com Utilizadores | 3 valores | Conduzir sessão de teste + questionário; participar como utilizador em 2 projetos de colegas |
-| Apresentação Final | 2 valores | Demo + metodologia + resultados (abrange Parte 1 + Parte 2) |
+| Protótipo de Alta Fidelidade | 10 valores | App Android funcional com redesign baseado no feedback |
+| Funcionalidades Implementadas | 5 valores | 1 funcionalidade por cenário (1 Miguel + 1 Francisco) |
+| Avaliação com Utilizadores | 3 valores | Sessão de teste + questionário + participar em 2 projetos de colegas |
+| Apresentação Final | 2 valores | Demo + metodologia + resultados (Parte 1 + Parte 2) |
 
 ---
 
-## 3. Plano de Trabalho — O que fazer e por onde começar
+## 3. Divisão de tarefas
 
-### FASE 1 — Redesign do Protótipo (Alta Fidelidade no Android)
+### 3.1 Tarefas conjuntas (decisão e execução partilhada)
 
-**Objetivo:** Transformar os ecrãs do Figma (F1–F4) numa app Android funcional, incorporando o feedback recebido na apresentação do low-fi.
+- [ ] Criar **repositório GitHub novo** para a app Android (ex.: `EasyMed-Android`) — partilhado pelos dois
+- [ ] Definir **paleta de cores, tipografia e tema Material** únicos para toda a app
+- [ ] Implementar a **Bottom Navigation Bar** comum (Hoje / Medicamentos / Histórico / Perfil)
+- [ ] Definir **ecrã inicial de seleção de perfil** (Paciente / Cuidador) ou login simulado
+- [ ] Criar **modelo de dados mock partilhado** (paciente António Ferreira, lista de medicamentos, estados)
+- [ ] Integrar os dois fluxos no mesmo APK e garantir consistência visual
+- [ ] Redigir o **relatório final em conjunto** (estrutura na Fase 5)
+- [ ] Preparar a **apresentação final** (cada um apresenta o seu cenário)
+- [ ] Cada um participa como utilizador em **2 projetos de colegas**
 
-**Tarefas:**
+### 3.2 FASE 1 — Redesign do Protótipo (Alta Fidelidade)
 
-- [ ] **Rever o feedback** dado pelo docente na apresentação do protótipo de baixa fidelidade — identificar o que redesenhar
-- [ ] **Criar projeto Android** (Android Studio, Java ou Kotlin) com estrutura de navegação:
-  - `LockScreenNotificationActivity` (F1)
-  - `CaregiverDashboardActivity` (F2)
-  - `MedicationDetailActivity` (F3)
-  - `WeeklyHistoryActivity` (F4)
-- [ ] **Implementar Bottom Navigation Bar** com os 4 separadores: Hoje / Medicamentos / Histórico / Perfil
-- [ ] **Aplicar paleta de cores** da EasyMed (consistente com os ecrãs do Miguel — Cenário 1)
-- [ ] **Garantir botões ≥ 48×48dp** e tipografia legível (acessibilidade)
-- [ ] **Criar dados mock/simulados** para demonstrar o cenário (paciente António, medicamentos, estados)
+**Francisco (Cenário 2 — Cuidador):**
+- [ ] Rever feedback do docente sobre os ecrãs F1–F4 do low-fi
+- [ ] Implementar `LockScreenNotificationActivity` (F1)
+- [ ] Implementar `CaregiverDashboardActivity` (F2)
+- [ ] Implementar `MedicationDetailActivity` (F3)
+- [ ] Implementar `WeeklyHistoryActivity` (F4)
+- [ ] Garantir que a distinção visual das notificações é mais clara que a do MyTherapy
+- [ ] O botão "Ligar ao Paciente" deve ser CTA principal no F3
 
-**Notas de redesign a considerar (baseadas nas limitações identificadas na Parte 1):**
-- A distinção visual das notificações deve ser mais clara que a do MyTherapy
-- Evitar sobrecarga funcional — manter cada ecrã focado numa só ação crítica
-- O botão "Ligar ao Paciente" deve ser o CTA principal no F3, não enterrado no layout
+**Miguel (Cenário 1 — Paciente):**
+- [ ] Rever feedback do docente sobre os ecrãs M1–M4 do low-fi
+- [ ] Implementar `MedicationAlertLockScreenActivity` (M1)
+- [ ] Implementar `MedicationNotificationExpandedActivity` (M2) com botões grandes "Tomei" / "Adiar"
+- [ ] Implementar `IntakeConfirmationActivity` (M3) — feedback visual claro
+- [ ] Implementar `PatientHomeActivity` (M4) — resumo diário com código de cores
+- [ ] Garantir tipografia grande (mínimo 18sp) e botões muito generosos (≥ 64dp) para idosos com dedos trémulos
+- [ ] Evitar menus profundos — máximo 1 nível para ação crítica
 
 ---
 
-### FASE 2 — Funcionalidade a Implementar (1 funcionalidade core)
+### 3.3 FASE 2 — Funcionalidades a Implementar
 
-**Funcionalidade prioritária para o Cenário 2:**
+**Francisco (Cenário 2 — Cuidador):**
 
-> **Dashboard do Cuidador com atualização de estado em tempo real** (ecrã F2 + F3)
+> **Funcionalidade prioritária:** Dashboard do Cuidador com atualização de estado em tempo real (F2 + F3)
 
-Justificação: É o coração do cenário — a Carla precisa de ver imediatamente o estado do pai. Esta funcionalidade demonstra o código de cores, a lista de tomas e o botão de chamada, cobrindo os passos 2, 3 e 4 do HTA.
-
-**O que implementar concretamente:**
-- [ ] Lista de pacientes no dashboard (F2) com indicador de cor por estado
-- [ ] Ao tocar num paciente → navega para detalhe das tomas (F3)
+- [ ] Lista de pacientes no dashboard com indicador de cor por estado
+- [ ] Toque num paciente → navega para detalhe das tomas
 - [ ] Lista de medicamentos com estados: ✅ Tomado / ❌ Ignorado / ⏳ Pendente / ⚠️ Atraso
-- [ ] Botão "Ligar ao paciente" que abre o marcador telefónico (Intent ACTION_DIAL)
-- [ ] Simulação de atualização de estado (ex.: botão "Simular toma" para demo)
+- [ ] Botão **"Ligar ao paciente"** com `Intent.ACTION_DIAL`
+- [ ] Simulação de transição de estado (botão "Simular toma" para a demo)
 
-**Alternativa se o tempo for escasso:** Implementar apenas F2 + F3 com dados estáticos mas interação real (navegação, cliques, cores).
+**Miguel (Cenário 1 — Paciente):**
 
----
+> **Funcionalidade prioritária:** Notificação acionável de toma + Confirmação (M2 + M3)
 
-### FASE 3 — Avaliação com Utilizadores
+- [ ] Sistema de **notificação Android** com `NotificationCompat` e botões de ação ("Tomei" / "Adiar")
+- [ ] `BroadcastReceiver` que recebe o clique no botão "Tomei" e regista a toma
+- [ ] Ecrã de confirmação (M3) com visto verde, nome do medicamento e hora atual
+- [ ] Atualização do estado da toma no ecrã principal (M4) — verde após confirmação
+- [ ] Botão **"Adiar 15 min"** que reagenda o alarme com `AlarmManager`
+- [ ] Simulação: botão na app para disparar uma notificação de teste
 
-#### 3.1 Planeamento da avaliação
-
-**Metodologia:** Teste de usabilidade com observação + questionário pós-teste (recomendado: SUS — System Usability Scale, ou questionário próprio)
-
-**Participantes:** Mínimo 2–3 utilizadores (os elementos dos grupos de colegas que participarão como utilizadores no vosso projeto)
-
-**Tarefas a propor (baseadas no HTA do Cenário 2):**
-
-| # | Tarefa | Critério de sucesso |
-|---|--------|---------------------|
-| T1 | "Recebeste uma notificação da EasyMed. Abre a app e descobre qual o medicamento em falta do António." | Chegar ao F3 em ≤ 3 cliques |
-| T2 | "Liga ao paciente através da app." | Acionar o botão "Ligar ao Paciente" |
-| T3 | "Consulta o histórico semanal do António." | Navegar até F4 com sucesso |
-
-**Métricas a recolher (obrigatório):**
-- Número de cliques por tarefa
-- Tempo de conclusão de cada tarefa
-- Número de erros cometidos
-- Taxa de sucesso (tarefa concluída sem ajuda?)
-
-**Instrumentos de registo:**
-- [ ] **Folha de registo** para o avaliador (ver template abaixo)
-- [ ] **Gravação da sessão** (ecrã do telemóvel + áudio, ou videochamada se remoto)
-- [ ] **Questionário pós-teste** (SUS ou equivalente)
-
-**Condução da sessão:**
-1. Briefing ao utilizador (explicar o contexto da EasyMed, sem revelar a solução)
-2. Warm-up (mostrar a app brevemente)
-3. Propor tarefas T1, T2, T3 uma a uma (think-aloud protocol)
-4. Registar métricas
-5. Aplicar questionário
-
-**Nota:** A avaliação pode ser feita à distância por videoconferência, desde que a app corra remotamente e o utilizador consiga interagir.
+**Alternativa partilhada se o tempo apertar:** implementar apenas com dados estáticos, mas garantir navegação e cliques reais.
 
 ---
 
-#### 3.2 Template — Folha de Registo de Sessão
+### 3.4 FASE 3 — Avaliação com Utilizadores
+
+#### Planeamento conjunto
+- [ ] Recrutar **mínimo 2–3 utilizadores cada** (podem ser os mesmos para os dois cenários)
+- [ ] Acordar metodologia: **observação + think-aloud + questionário SUS**
+- [ ] Preparar **folha de registo** comum (template em 3.6)
+- [ ] Gravar sessões (ecrã + áudio)
+
+#### Tarefas a propor — Francisco (Cenário 2)
+
+| # | Tarefa | Critério |
+|---|--------|----------|
+| F-T1 | "Recebeste uma notificação. Descobre qual o medicamento em falta do António." | ≤ 3 cliques |
+| F-T2 | "Liga ao paciente através da app." | Aciona o botão "Ligar ao Paciente" |
+| F-T3 | "Consulta o histórico semanal do António." | Chega ao F4 |
+
+#### Tarefas a propor — Miguel (Cenário 1)
+
+| # | Tarefa | Critério |
+|---|--------|----------|
+| M-T1 | "Recebeste um alerta na app. Confirma que tomaste o medicamento." | Carrega em "Tomei" sem entrar na app |
+| M-T2 | "Adia o próximo alerta por 15 minutos." | Usa o botão "Adiar" |
+| M-T3 | "Verifica quais os medicamentos que já tomaste hoje." | Chega ao ecrã M4 |
+
+#### Métricas (obrigatórias para os dois)
+- Número de cliques · Tempo de conclusão · Erros · Taxa de sucesso
+
+---
+
+### 3.5 Template — Folha de Registo (comum)
 
 ```
 Avaliador: _______________  Data: _______________  Participante nº: ___
+Cenário avaliado: [ ] Cenário 1 (Paciente)   [ ] Cenário 2 (Cuidador)
 
-TAREFA 1 — Identificar medicamento em falta
+TAREFA 1 — _________________________
   Tempo: ______s  |  Nº cliques: ___  |  Erros: ___  |  Sucesso: S/N
   Observações: __________________________________________________
 
-TAREFA 2 — Ligar ao paciente
+TAREFA 2 — _________________________
   Tempo: ______s  |  Nº cliques: ___  |  Erros: ___  |  Sucesso: S/N
   Observações: __________________________________________________
 
-TAREFA 3 — Consultar histórico semanal
+TAREFA 3 — _________________________
   Tempo: ______s  |  Nº cliques: ___  |  Erros: ___  |  Sucesso: S/N
   Observações: __________________________________________________
 
-Comentários gerais do utilizador durante a sessão:
+Comentários gerais do utilizador:
 ______________________________________________________________
 ```
 
----
+### 3.6 Questionário pós-teste (SUS simplificado, comum)
 
-#### 3.3 Questionário pós-teste (SUS simplificado)
-
-Escala de 1 (discordo totalmente) a 5 (concordo totalmente):
+Escala 1 (discordo totalmente) a 5 (concordo totalmente):
 
 1. Achei a app fácil de usar.
 2. Consegui completar as tarefas sem precisar de ajuda.
 3. A informação mais importante estava sempre visível.
 4. As cores e ícones ajudaram-me a perceber o estado da medicação.
-5. Voltaria a usar esta app se fosse cuidador de um familiar.
-
-**Pontuação SUS oficial (opcional):** usar as 10 perguntas padrão do SUS para obter score 0–100.
+5. Voltaria a usar esta app no contexto real (como paciente ou cuidador).
 
 ---
 
-#### 3.4 Participação como utilizador em projetos de colegas
+### 3.7 Participação em projetos de colegas
 
-- [ ] Participar em **2 projetos** de outros grupos como utilizador
-- [ ] Registar no relatório: **quais os projetos** em que participou (nome do grupo/equipa)
+| Aluno | Projeto 1 | Projeto 2 |
+|---|---|---|
+| Francisco | _______________ | _______________ |
+| Miguel | _______________ | _______________ |
 
 ---
 
-### FASE 4 — Relatório Final
+### FASE 4 — Relatório Final (conjunto)
 
-**Estrutura do relatório (PDF único do grupo):**
+**Estrutura do PDF único:**
 
 ```
-Parte 1 (já feita — integrar o relatório individual)
+Parte 1 (já feita)
   - Ferramentas e organização da equipa
-  - Participação em eventos de informática no IPBeja
-  - Sistemas semelhantes (MyTherapy + análise do Miguel)
-  - Caracterização dos utilizadores (Personas)
-  - Cenários de utilização
-  - Análise de tarefas (HTA)
+  - Sistemas similares (MediSafe — Miguel · MyTherapy — Francisco)
+  - Personas (António — Miguel · Carla — Francisco)
+  - Cenários 1 e 2
+  - Análise de tarefas (HTA1 + HTA2)
   - Estilos e dispositivos de interação
-  - Protótipo de baixa fidelidade (esboços, navegação, justificação)
+  - Protótipo de baixa fidelidade (M1–M4 + F1–F4)
 
 Parte 2 (a fazer)
-  - Protótipo de alta fidelidade (screenshots da app Android)
-  - Funcionalidades implementadas (justificação da escolha + descrição)
-  - Avaliação com utilizadores:
-      → Metodologia escolhida e justificação
-      → Planeamento (participantes, instrumentos, tarefas)
-      → Resultados das métricas
-      → Análise e comentários
+  - Protótipo de alta fidelidade — screenshots da app Android
+      → Subseção Miguel (ecrãs M1–M4)
+      → Subseção Francisco (ecrãs F1–F4)
+  - Funcionalidades implementadas
+      → Miguel: Notificação acionável + Confirmação de toma
+      → Francisco: Dashboard com estado em tempo real + ACTION_DIAL
+  - Avaliação com utilizadores
+      → Metodologia conjunta
+      → Resultados Miguel (M-T1, M-T2, M-T3)
+      → Resultados Francisco (F-T1, F-T2, F-T3)
+      → Análise comparativa e comentários
       → Projetos em que participámos como utilizadores
 ```
 
 **Nome do ficheiro ZIP:**
 ```
-TG2_[nº_equipa]_[nº1]_[nº2]_[nº3]_[nº4].zip
+TG2_[nº_equipa]_14060_27131.zip
 ```
-Contém: relatório PDF + apresentação + link GitHub da app
+Contém: relatório PDF + apresentação + link GitHub da app.
 
-**Entrega:** Moodle da UC (não aceita e-mail)
-
-**Repositório GitHub:** criar repositório novo para a app Android e incluir o link no relatório.
+**Entrega:** Moodle da UC.
 
 ---
 
 ### FASE 5 — Apresentação Final
 
-**Estrutura (Parte 1 + Parte 2, cada uma vale 2 valores):**
+**Estrutura conjunta (cada parte vale 2 valores):**
 
-- Parte 1: Análise e desenho (persona, cenário, HTA, protótipo low-fi, navegação)
-- Parte 2: Demo da app Android + metodologia de avaliação + resultados dos testes
-
-**Cada aluno apresenta o trabalho que desenvolveu** (Francisco apresenta Cenário 2 completo).
+| Bloco | Quem apresenta | Conteúdo |
+|---|---|---|
+| Intro (1 min) | Em conjunto | Equipa, EasyMed, contexto |
+| Parte 1 — Cenário 1 | Miguel | Persona António, HTA1, ecrãs M1–M4 |
+| Parte 1 — Cenário 2 | Francisco | Persona Carla, HTA2, ecrãs F1–F4 |
+| Parte 2 — Demo Miguel | Miguel | Notificação acionável + confirmação |
+| Parte 2 — Demo Francisco | Francisco | Dashboard + ACTION_DIAL |
+| Parte 2 — Avaliação | Em conjunto | Metodologia, resultados, conclusões |
+| Q&A | Em conjunto | — |
 
 ---
 
 ## 4. Checklist de Entrega
 
-### Protótipo Android
-- [ ] App corre num emulador ou dispositivo Android real
-- [ ] Ecrãs F1–F4 navegáveis
-- [ ] Código de cores implementado (verde/vermelho/amarelo)
+### App Android (conjunto)
+- [ ] App corre em emulador ou dispositivo real
+- [ ] Ecrã inicial permite escolher perfil (Paciente / Cuidador)
+- [ ] Paleta de cores e tema consistentes
 - [ ] Bottom Navigation Bar funcional
-- [ ] Pelo menos 1 funcionalidade real implementada (não apenas estática)
-- [ ] Botão "Ligar ao Paciente" funcional (Intent ACTION_DIAL)
-- [ ] Código no GitHub (repositório TG2)
+- [ ] Código no GitHub (repositório TG2 novo)
+
+### Francisco (Cenário 2)
+- [ ] Ecrãs F1–F4 navegáveis
+- [ ] Dashboard com código de cores
+- [ ] Botão "Ligar ao Paciente" funcional (ACTION_DIAL)
+- [ ] Simulação de atualização de estado
+
+### Miguel (Cenário 1)
+- [ ] Ecrãs M1–M4 navegáveis
+- [ ] Notificação Android com ações "Tomei" / "Adiar"
+- [ ] Confirmação de toma com feedback visual
+- [ ] Botões grandes (≥ 64dp) e tipografia acessível
+- [ ] Reagendamento via AlarmManager
 
 ### Avaliação
-- [ ] Mínimo 2 utilizadores testaram a app
-- [ ] Sessões gravadas
+- [ ] Mínimo 2 utilizadores testaram cada cenário
+- [ ] Sessões gravadas (Francisco + Miguel)
 - [ ] Folhas de registo preenchidas
-- [ ] Questionário aplicado
-- [ ] Resultados analisados no relatório
-- [ ] Identificados os 2 projetos de colegas em que participei como utilizador
+- [ ] Questionário SUS aplicado
+- [ ] Cada um participou em 2 projetos de colegas
 
 ### Relatório
-- [ ] PDF único com Parte 1 + Parte 2
+- [ ] PDF único com Parte 1 + Parte 2 (Miguel + Francisco)
 - [ ] Link do repositório GitHub da app incluído
 - [ ] Contribuições individuais identificáveis
-- [ ] Nome do ficheiro correto (TG2_...)
 - [ ] Submetido no Moodle
 
 ### Apresentação
-- [ ] Demo ao vivo da app
+- [ ] Demo ao vivo dos dois cenários
 - [ ] Parte 1 coberta (2 valores)
 - [ ] Parte 2 coberta (2 valores)
 
@@ -274,11 +319,19 @@ Contém: relatório PDF + apresentação + link GitHub da app
 
 ## 5. Referências da Parte 1 a reutilizar
 
-- **HTA Cenário 2:** `Docs/05_analise_tarefas/francisco_hta2/hta2_francisco.md`
-- **Protótipos Figma:** `Docs/07_prototipo/francisco/navegacao/`
-- **Repositório TG1:** https://github.com/Fsoudo/IPC-TG1-PART-1
-- **Sistema semelhante analisado:** MyTherapy (Android/iOS) — pontos a evitar: sobrecarga funcional, processo de inserção extenso, notificações pouco distintas
+### Francisco
+- HTA: `Docs/05_analise_tarefas/francisco_hta2/hta2_francisco.md`
+- Protótipos: `Docs/07_prototipo/francisco/`
+- Sistema similar: **MyTherapy** — evitar sobrecarga funcional, processo de inserção extenso, notificações pouco distintas
+
+### Miguel
+- HTA: `Docs/05_analise_tarefas/miguel_hta1/hta1_miguel.md`
+- Protótipos: `Docs/07_prototipo/miguel/`
+- Sistema similar: **MediSafe**
+
+### Conjunto
+- Repositório Parte 1: https://github.com/Fsoudo/IPC-TG1
 
 ---
 
-*Guia gerado em 2026-05-20 com base no enunciado TG2 e no relatório individual da Parte 1.*
+*Guia revisto em 2026-05-26 — divisão de tarefas entre Francisco (Cenário 2 / Cuidador) e Miguel (Cenário 1 / Paciente).*

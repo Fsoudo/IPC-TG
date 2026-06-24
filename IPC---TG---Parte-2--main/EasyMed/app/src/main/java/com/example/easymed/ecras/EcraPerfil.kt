@@ -35,18 +35,6 @@ import com.example.easymed.ui.theme.FundoClaro
 // ============================================================
 // ECRÃ "PERFIL" (partilhado pelos dois modos)
 // Autores: Miguel Pauzinho (27131) e Francisco Soudo (14060)
-//
-//
-//
-// Mostra quem está a usar a app e permite TROCAR DE MODO: Paciente
-// (António) <-> Cuidador (Carla). O enunciado do TG2 aceita
-// "ilustrar o funcionamento geral mesmo que determinados aspetos
-// não estejam totalmente implementados": num produto real os dois
-// teriam telemóveis ligados por um servidor; no protótipo os dois
-// perfis vivem na mesma app, para se poderem demonstrar os dois
-// cenários na aula e nos testes.
-//
-//
 // ============================================================
 
 

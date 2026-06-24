@@ -36,16 +36,6 @@ import com.example.easymed.ui.theme.VermelhoIgnorado
 // ============================================================
 // ECRA F4 - HISTORICO SEMANAL DO ANTONIO (Cenario 2)
 // Autor: Francisco Soudo (14060)
-//
-// A visao "tipo calendario" da semana do Antonio, pensada para a
-// Carla (enfermeira) identificar PADROES de falhas - por exemplo,
-// se a toma das 15:00 falha sempre, talvez seja preciso mudar a
-// hora com o medico. Corresponde ao prototipo "F4" do TG1
-// (correspondencia com o mundo real: uma semana de calendario).
-//
-// Os numeros por medicamento sao dados de exemplo - o enunciado
-// permite ilustrar o funcionamento geral da aplicacao sem estar
-// tudo implementado. O dia de HOJE e calculado com os dados reais.
 // ============================================================
 
 // @param aoVoltar: acao da seta de "voltar" no cabecalho (regressa ao F3)

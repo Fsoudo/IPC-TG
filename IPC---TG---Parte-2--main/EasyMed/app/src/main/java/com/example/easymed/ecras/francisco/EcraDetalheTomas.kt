@@ -45,25 +45,6 @@ import com.example.easymed.ui.theme.VermelhoIgnorado
 // ============================================================
 // ECRA F3 - DETALHE DAS TOMAS DO ANTONIO (Cenario 2)
 // Autor: Francisco Soudo (14060)
-//
-// A Carla ve aqui as tomas do dia do pai, uma a uma, com o
-// codigo de cores. Tem duas acoes importantes:
-//
-//   1. "Ligar ao António": abre o marcador de telefone do Android
-//      com o numero ja escrito (Intent ACTION_DIAL, nao precisa de
-//      permissoes especiais).
-//
-//   2. "Forçar Registo da Toma": e a 2.a funcionalidade do Cenario 2.
-//      Depois de falar com o pai ao telefone, a Carla regista
-//      manualmente a toma que estava IGNORADA (vermelha). O estado
-//      passa a ATRASO (amarelo) - nao a verde, porque foi feita fora
-//      de horas. Este botao SO aparece quando existe uma toma ignorada.
-//
-// Prevencao de erros (heuristica de Nielsen): registar uma toma de
-// outra pessoa e uma acao com peso clinico, por isso pedimos uma
-// CONFIRMACAO EXTRA num dialogo antes de a gravar (evita o "fat-finger",
-// o toque acidental). E a mesma ideia do "swipe de confirmacao" que
-// estava previsto no prototipo do TG1.
 // ============================================================
 
 @Composable

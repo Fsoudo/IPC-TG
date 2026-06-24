@@ -34,16 +34,6 @@ import com.example.easymed.ui.theme.VermelhoIgnorado
 // ============================================================
 // ECRA F1 - NOTIFICACAO CRITICA NO ECRA BLOQUEADO (Cenario 2)
 // Autor: Francisco Soudo (14060)
-//
-// Simula o telemovel da Carla (cuidadora) a receber o alerta de
-// que o pai nao confirmou a toma. Versao de alta fidelidade do
-// prototipo "F1" do TG1. O relogio mostra a hora prevista + 30
-// minutos, porque e ao fim de 30 min sem confirmacao que o
-// sistema dispara o alerta (regra definida no Cenario 2).
-//
-// O vermelho so e usado em situacoes de alerta verdadeiras -
-// e por isso que chama mesmo a atencao (design minimalista:
-// nada no ecra compete com o alerta).
 // ============================================================
 
 // @param aoVerDetalhe: acao ao tocar no alerta (MainActivity leva ao detalhe F3)

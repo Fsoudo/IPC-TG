@@ -39,17 +39,6 @@ import com.example.easymed.ui.theme.VermelhoIgnorado
 // ============================================================
 // ECRA F2 - DASHBOARD DO CUIDADOR (Cenario 2)
 // Autor: Francisco Soudo (14060)
-//
-// O ecra principal da Carla: mostra os pacientes que acompanha,
-// cada um com uma "bolinha" de cor que indica o estado atual.
-// A Carla percebe de relance se esta tudo bem com o pai.
-// (Heuristica de Nielsen: Visibilidade do Estado do Sistema)
-//
-// Em modo "crise" (toma ignorada), o cartao do Antonio fica
-// com borda vermelha para chamar a atencao imediatamente.
-// (Heuristica: Estetica e Design Minimalista - s o o essencial
-// destaca quando ha um problema)
-//
 // @param aoVerDetalhe:    vai para o ecra F3 (tomas do Antonio)
 // @param aoSimularAlerta: vai para o ecra F1 (notificacao critica)
 // ============================================================

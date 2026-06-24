@@ -31,17 +31,6 @@ import com.example.easymed.ui.theme.FundoEcraBloqueado
 // ============================================================
 // ECRA M1 - ECRA BLOQUEADO COM NOTIFICACAO (Cenario 1)
 // Autor: Miguel Pauzinho (27131)
-//
-// Simula o telemovel bloqueado do Antonio na hora da toma.
-// E a versao de alta fidelidade do prototipo "M1 - Ecra Bloqueado"
-// do TG1 (Figma). O relogio grande mostra a hora PREVISTA da toma,
-// porque na historia do cenario o alarme toca exatamente a essa hora.
-//
-// Nota (planeamento TG2): as notificacoes reais do Android
-// precisavam de permissoes e de AlarmManager; ficou decidido usar
-// o "plano B" - simular o ecra bloqueado dentro da app, o que ate
-// e mais fiel ao prototipo do TG1 e mais fiavel na demo e nos
-// testes com utilizadores.
 // ============================================================
 
 // @param tomaId:             a toma que o alarme esta a anunciar (escolhida na MainActivity)

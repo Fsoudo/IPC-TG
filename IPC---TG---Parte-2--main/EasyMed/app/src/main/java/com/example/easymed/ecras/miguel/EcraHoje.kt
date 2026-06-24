@@ -34,16 +34,6 @@ import com.example.easymed.ui.theme.VerdeTomado
 // ECRA M4 - ECRA PRINCIPAL "HOJE" (Cenario 1)
 // Autor: Miguel Pauzinho (27131)
 //
-// E o ecra onde o Antonio passa a maior parte do tempo:
-// mostra a lista das tomas de hoje com cores, um cartao de
-// resumo no topo e a indicacao da proxima toma.
-// Prototipo de referencia: "M4 - Ecra Principal" (TG1).
-//
-// O botao "Simular Alarme" e o inicio da demo do Cenario 1:
-//   1. Envia uma notificacao REAL para a barra do Android
-//   2. Muda o ecra para M1 (ecra bloqueado)
-//   3. O utilizador continua: M1 -> M2 -> M3 -> volta aqui
-//
 // @param aoSimularAlarme: funcao chamada pelo botao "Simular Alarme";
 //   definida na MainActivity e muda o ecra para "m1_bloqueado"
 // ============================================================

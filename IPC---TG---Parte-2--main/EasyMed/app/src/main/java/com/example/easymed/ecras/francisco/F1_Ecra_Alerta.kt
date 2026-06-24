@@ -30,15 +30,6 @@ import com.example.easymed.ui.theme.Vermelho
 // ============================================================
 // ECRÃ F1 - ECRÃ BLOQUEADO/ALERTA DA CUIDADORA (Cenário 2)
 // Autor: Francisco Soudo (14060)
-//
-//
-//
-// A notificação toda é clicável: tocar em
-// qualquer parte do cartão abre o detalhe das tomas (F3). É uma
-// notificação minimalista (heurística de Nielsen: estética e design
-// minimalista).
-//
-//
 // ============================================================
 
 

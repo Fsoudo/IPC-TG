@@ -33,13 +33,6 @@ import com.example.easymed.ui.theme.VerdeEscuroVisto
 // ============================================================
 // ECRA M3 - CONFIRMACAO DA TOMA (Cenario 1)
 // Autor: Miguel Pauzinho (27131)
-//
-// Aparece logo a seguir ao Antonio carregar em "Tomei".
-// Feedback claro e imediato (heuristica: visibilidade do estado):
-// um visto verde GRANDE, o nome do medicamento e a hora real
-// a que ficou registado. Mostra tambem qual e a proxima toma,
-// para o Antonio nao ter de decorar nada (heuristica:
-// reconhecimento em vez de memorizacao).
 // ============================================================
 
 // @param tomaId:     o id da toma que acabou de ser confirmada (vem do M2)

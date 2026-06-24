@@ -31,17 +31,6 @@ import com.example.easymed.ui.theme.VerdeTomado
 // ============================================================
 // ECRÃ M2 - NOTIFICAÇÃO EXPANDIDA (Cenário 1)
 // Autor: Miguel Pauzinho (27131)
-//
-//
-//
-// Versão de ALTA FIDELIDADE do "M2 - Notificação Expandida" do TG1.
-// Abre a partir do M1 (tocar na notificação) e mostra a notificação
-// aberta com os dois botões de ação: "Tomei" regista a toma (verde)
-// e vai para o M3; "Adiar 15 min" adia a toma e volta ao ecrã "Hoje".
-// Prevenção de erros (heurística de Nielsen): o "Tomei" é maior e
-// mais destacado que o "Adiar".
-//
-//
 // ============================================================
 
 

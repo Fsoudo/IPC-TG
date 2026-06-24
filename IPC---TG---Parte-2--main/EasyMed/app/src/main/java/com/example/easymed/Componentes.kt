@@ -41,14 +41,6 @@ import com.example.easymed.ui.theme.VermelhoIgnorado
 // ============================================================
 // COMPONENTES REUTILIZADOS NOS VÁRIOS ECRÃS (TG2)
 // Autores: Miguel Pauzinho (27131) e Francisco Soudo (14060)
-//
-//
-//
-// Em vez de repetir o mesmo código em todos os ecrãs, criamos aqui
-// peças de interface que os dois cenários usam. Isto também garante
-// CONSISTÊNCIA visual (outra heurística de Nielsen).
-//
-//
 // ============================================================
 
 

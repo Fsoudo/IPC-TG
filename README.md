@@ -22,7 +22,7 @@
 | Componente | Estado |
 |---|---|
 | Parte 1 — Análise e Desenho | ✅ Concluída |
-| Parte 2 — Implementação e Avaliação | 🔄 Em desenvolvimento |
+| Parte 2 — Implementação e Avaliação | ✅ Concluída  |
 
 ---
 
